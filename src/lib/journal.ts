@@ -134,7 +134,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     ],
     content: [
       "An outfit is an experience for all senses. When you wear a tailored wool coat and hand-buffed calfskin shoes, wearing a cloying, synthetic aquatic fragrance creates dissonance.",
-      "Atelier AI integrates fragrance into every outfit capsule because scent serves as the emotional sealant. For old-money and quiet luxury edits, niche fragrances with prominent notes of sandalwood (Le Labo Santal 33), raw tobacco (Maison Margiela Jazz Club), or Tuscan leather (Tom Ford Ombré Leather) provide the tactile resonance that visually matches heavy woolen fabrics.",
+      "innit integrates fragrance into every outfit capsule because scent serves as the emotional sealant. For old-money and quiet luxury edits, niche fragrances with prominent notes of sandalwood (Le Labo Santal 33), raw tobacco (Maison Margiela Jazz Club), or Tuscan leather (Tom Ford Ombré Leather) provide the tactile resonance that visually matches heavy woolen fabrics.",
     ],
     recommendedAesthetic: "Old Money",
   },

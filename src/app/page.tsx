@@ -45,7 +45,7 @@ export default function HomePage() {
       a: "Your uploaded garments are processed solely to extract styling parameters. Photos are kept in your private account lookbook and can be permanently deleted with a single click in your account settings.",
     },
     {
-      q: "Does Atelier AI earn a commission?",
+      q: "Does innit earn a commission?",
       a: "We participate in selective affiliate programs with authorized retailers. When you purchase through our links, we may receive a commission at no additional cost to you.",
     },
   ];
@@ -301,7 +301,7 @@ export default function HomePage() {
                   COMPLIMENTARY ACCESS
                 </span>
                 <h3 className="font-serif text-3xl text-bone-100 font-light mb-2">
-                  Atelier Discovery
+                  innit Discovery
                 </h3>
                 <div className="font-serif text-4xl text-bone-100 mb-6">
                   $0 <span className="text-xs font-sans text-bone-400 uppercase tracking-wider">/ 3 Outfits</span>
@@ -453,7 +453,7 @@ export default function HomePage() {
             href="/studio"
             className="inline-flex bg-bone-100 hover:bg-bone-200 text-obsidian px-10 py-4 rounded-xl text-xs font-semibold tracking-widest-plus uppercase transition-all duration-300 shadow-2xl hover:scale-105"
           >
-            Open Atelier Studio
+            Open innit Studio
           </Link>
         </div>
       </section>

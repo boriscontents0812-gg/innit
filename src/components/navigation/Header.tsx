@@ -74,11 +74,11 @@ export default function Header() {
         {/* Center Logo */}
         <div className="flex flex-col items-center">
           <Link href="/" className="group flex flex-col items-center">
-            <span className="font-serif text-2xl sm:text-3xl tracking-editorial text-bone-100 uppercase font-light transition-opacity group-hover:opacity-90">
-              ATELIER AI
+            <span className="font-serif text-2xl sm:text-3xl tracking-editorial text-bone-100 font-light transition-opacity group-hover:opacity-90 lowercase">
+              innit
             </span>
             <span className="text-[9px] tracking-widest-plus text-brass-400/90 uppercase -mt-0.5 font-medium">
-              Curated Fashion Studio
+              AI Fashion Stylist
             </span>
           </Link>
         </div>

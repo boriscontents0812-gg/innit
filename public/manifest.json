@@ -1,6 +1,6 @@
 {
-  "name": "ATELIER AI — AI Fashion Stylist",
-  "short_name": "Atelier AI",
+  "name": "innit — AI Fashion Stylist",
+  "short_name": "innit",
   "description": "Transform one uploaded clothing piece into a complete, purchasable luxury outfit.",
   "start_url": "/",
   "display": "standalone",

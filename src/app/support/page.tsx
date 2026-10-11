@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Mail, MessageSquare, Sparkles } from "lucide-react";
 
 export const metadata = {
-  title: "Atelier Support & Concierge — Atelier AI",
+  title: "innit Support & Concierge — innit",
 };
 
 export default function SupportPage() {
@@ -14,7 +14,7 @@ export default function SupportPage() {
         className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-bone-400 hover:text-brass-400 transition-colors mb-8"
       >
         <ArrowLeft className="w-4 h-4" />
-        <span>Return to Atelier Home</span>
+        <span>Return to innit Home</span>
       </Link>
 
       <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brass-400 font-semibold mb-2">
@@ -23,7 +23,7 @@ export default function SupportPage() {
       </div>
 
       <h1 className="font-serif text-3xl sm:text-5xl text-bone-100 font-light mb-8">
-        Atelier Care & Inquiries
+        innit Care & Inquiries
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
@@ -36,10 +36,10 @@ export default function SupportPage() {
             For technical support with photo uploads, Stripe billing, or custom outfit requests.
           </p>
           <a
-            href="mailto:support@atelier-stylist.internal"
+            href="mailto:support@innit.internal"
             className="text-xs text-brass-400 hover:underline font-mono"
           >
-            support@atelier-stylist.internal
+            support@innit.internal
           </a>
         </div>
 
@@ -52,10 +52,10 @@ export default function SupportPage() {
             For luxury brands and independent leather goods designers interested in catalog indexing.
           </p>
           <a
-            href="mailto:curators@atelier-stylist.internal"
+            href="mailto:curators@innit.internal"
             className="text-xs text-brass-400 hover:underline font-mono"
           >
-            curators@atelier-stylist.internal
+            curators@innit.internal
           </a>
         </div>
       </div>

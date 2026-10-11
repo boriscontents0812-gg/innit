@@ -23,7 +23,7 @@ const sansFont = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ATELIER AI — Editorial AI Fashion Stylist & Shopping",
+  title: "innit — Editorial AI Fashion Stylist & Shopping",
   description: "Upload one clothing piece. Discover a complete, coordinated luxury outfit. Shop real pieces globally.",
   manifest: "/manifest.json",
   icons: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "ATELIER AI — ONE PIECE. A WHOLE FIT.",
+    title: "innit — ONE PIECE. A WHOLE FIT.",
     description: "Transform one uploaded clothing piece into a complete, purchasable luxury outfit.",
     type: "website",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
-        alt: "Atelier AI Fashion Styling Platform",
+        alt: "innit AI Fashion Styling Platform",
       },
     ],
   },

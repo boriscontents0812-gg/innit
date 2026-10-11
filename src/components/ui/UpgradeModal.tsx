@@ -67,7 +67,7 @@ export default function UpgradeModal() {
             <Crown className="w-4 h-4" />
           </div>
           <span className="text-xs uppercase tracking-widest-plus text-brass-400 font-semibold">
-            ATELIER AI STYLIST PRO
+            innit STYLIST PRO
           </span>
         </div>
 

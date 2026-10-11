@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, RefreshCw } from "lucide-react";
 
 export const metadata = {
-  title: "Refund Policy — Atelier AI",
+  title: "Refund Policy — innit",
 };
 
 export default function RefundPage() {
@@ -14,7 +14,7 @@ export default function RefundPage() {
         className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-bone-400 hover:text-brass-400 transition-colors mb-8"
       >
         <ArrowLeft className="w-4 h-4" />
-        <span>Return to Atelier Home</span>
+        <span>Return to innit Home</span>
       </Link>
 
       <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brass-400 font-semibold mb-2">
@@ -37,7 +37,7 @@ export default function RefundPage() {
         <section className="bg-charcoal-900 border border-luxury-border p-6 rounded-2xl">
           <h2 className="font-serif text-xl text-bone-100 font-light mb-3">2. Physical Product Purchases</h2>
           <p>
-            Physical garments, shoes, and leather accessories recommended on Atelier AI are purchased directly through individual merchant sites (e.g. Deadly Ponies, Farfetch, SSENSE, COS). Returns, sizing exchanges, and refunds for physical goods are governed strictly by each retailer's respective policy.
+            Physical garments, shoes, and leather accessories recommended on innit are purchased directly through individual merchant sites (e.g. Deadly Ponies, Farfetch, SSENSE, COS). Returns, sizing exchanges, and refunds for physical goods are governed strictly by each retailer's respective policy.
           </p>
         </section>
       </div>

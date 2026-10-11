@@ -48,8 +48,8 @@ export default function OutfitCanvas({ outfit: initialOutfit, onRegenerateAll }:
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `Atelier AI Lookbook — ${outfit.aesthetic}`,
-        text: `Check out my coordinated outfit styled around my ${outfit.heroItem.name} on Atelier AI!`,
+        title: `innit Lookbook — ${outfit.aesthetic}`,
+        text: `Check out my coordinated outfit styled around my ${outfit.heroItem.name} on innit!`,
         url: window.location.href,
       }).catch(() => {});
     } else {

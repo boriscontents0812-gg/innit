@@ -120,7 +120,7 @@ export default function AdminPage() {
             <span>PROTECTED ADMINISTRATOR CONTROL</span>
           </div>
           <h1 className="font-serif text-3xl text-bone-100 font-light">
-            Atelier Management Console
+            innit Management Console
           </h1>
         </div>
 

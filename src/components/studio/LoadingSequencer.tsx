@@ -31,7 +31,7 @@ export default function LoadingSequencer() {
       </div>
 
       <span className="text-xs uppercase tracking-widest-plus text-brass-400 font-semibold block mb-2">
-        ATELIER AI VISION ENGINE
+        innit AI VISION ENGINE
       </span>
 
       <h3 className="font-serif text-2xl sm:text-3xl text-bone-100 font-light mb-8">

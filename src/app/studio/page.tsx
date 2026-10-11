@@ -84,7 +84,7 @@ export default function StudioPage() {
       {/* Studio Header */}
       <div className="text-center max-w-2xl mx-auto mb-12">
         <span className="text-[11px] uppercase tracking-widest-plus text-brass-400 font-semibold block mb-2">
-          BESPOKE CURATION STUDIO
+          innit BESPOKE CURATION STUDIO
         </span>
         <h1 className="font-serif text-3xl sm:text-5xl text-bone-100 font-light mb-3">
           One Piece. A Whole Fit.

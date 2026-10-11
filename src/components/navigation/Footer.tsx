@@ -152,11 +152,11 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-luxury-border/60">
           <div className="bg-charcoal-900 border border-luxury-border p-4 rounded-lg text-[11px] text-bone-400 leading-relaxed mb-6">
             <strong className="text-bone-200 block mb-1 uppercase tracking-wider">Affiliate & Partner Disclosure:</strong>
-            Atelier AI participates in selective affiliate marketing partnerships with fashion retailers and luxury brands (including Deadly Ponies, Farfetch, SSENSE, COS, Uniqlo, and Mr Porter). When you click or purchase recommended products via our links, we may earn an affiliate commission at no extra cost to you. We never fabricate shopping listings, discounts, or stock status. All prices and availability are verified through authorized feeds or direct merchant inventories.
+            innit participates in selective affiliate marketing partnerships with fashion retailers and luxury brands (including Deadly Ponies, Farfetch, SSENSE, COS, Uniqlo, and Mr Porter). When you click or purchase recommended products via our links, we may earn an affiliate commission at no extra cost to you. We never fabricate shopping listings, discounts, or stock status. All prices and availability are verified through authorized feeds or direct merchant inventories.
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-bone-500 gap-4">
-            <p>© {new Date().getFullYear()} ATELIER AI Ltd. All rights reserved. New Zealand & Worldwide.</p>
+            <p>© {new Date().getFullYear()} innit Ltd. All rights reserved. New Zealand & Worldwide.</p>
             <div className="flex items-center gap-4">
               <span>Secure SSL 256-bit Encryption</span>
               <span>•</span>
