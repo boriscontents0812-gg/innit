@@ -1,36 +1,171 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ATELIER AI — AI Fashion Stylist & Shopping Platform
 
-## Getting Started
+A production-ready, mobile-first AI fashion styling platform with the understated luxury aesthetic of **Deadly Ponies** (`deadlyponies.com`), built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, **Prisma ORM (SQLite/PostgreSQL)**, **Stripe**, and multi-modal AI Vision.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 1. Product Concept & Overview
+
+**"ONE PIECE. A WHOLE FIT."**
+
+The platform allows users on mobile (iOS/Safari) or desktop to upload a photo of any single clothing piece (sweater, jacket, shirt, trousers, shoes, or leather bag). 
+
+The AI vision engine extracts the garment's weave texture, silhouette proportions, and color undertones, assembling a complete, coordinated 5-piece capsule:
+1. **Matching Bottoms or Tops** (proportional balance)
+2. **Matching Footwear** (penny loafers, Chelsea boots, minimalist sneakers)
+3. **Outerwear & Layering** (tailored wool overcoats, trenches, bombers)
+4. **Artisanal Leather Accessories** (featuring handcrafted Deadly Ponies Bovine & Deer Nappa leather goods, belts, watches)
+5. **Lifestyle Atmosphere & Scent** (niche olfactive pairings like Le Labo Santal 33, Tom Ford Ombré Leather)
+
+Every piece includes a genuine **"Why This Matches"** explanation, verified real retailer links, real prices localized into 7 currencies, and individual piece swap controls.
+
+---
+
+## 2. Visual Identity (Deadly Ponies Aesthetic)
+
+- **Color Palette**:
+  - Obsidian & Charcoal Canvas: `#0C0C0D`, `#141416`, `#19181B`
+  - Bone & Cream Typography: `#FAF8F5`, `#F3EFE8`, `#C9C2B4`
+  - Solid Brass & Muted Gold Accents: `#C5A880`, `#D4B688`
+  - Razor-thin 1px Dividers: `#242321`
+- **Typography**:
+  - Serif Display Headlines: *Cormorant Garamond* / *Playfair Display*
+  - Body & Labels: *Plus Jakarta Sans* with tracked uppercase styling (`tracking-[0.25em] text-[10px]`)
+- **Layout**: Asymmetrical editorial moodboards, tactile photography, subtle micro-animations.
+
+---
+
+## 3. Mobile-First & iOS Experience
+
+- **Native Mobile Bottom Navigation**: Quick switches for *Studio*, *Journal*, *Saved Looks*, *Pro*, and *Account*.
+- **Camera & Gallery Picker**: Direct iOS camera trigger (`capture="environment"`), photo library picker, and desktop drag-and-drop.
+- **HEIC Image Handling**: Safe conversion and validation for iPhone photos up to 10MB.
+- **iOS Safe Areas**: Native notch and home bar padding (`pb-safe`, `pt-safe`, `viewport-fit=cover`).
+- **Progressive Web App**: Installable PWA with `manifest.json` and standalone display.
+
+---
+
+## 4. Business & Monetization Architecture
+
+### Complimentary Tier: 3 Free Outfits
+- Every user receives **3 free full outfit generations**.
+- Enforced on the server—credits are deducted **only** after generation successfully completes. Failed uploads never consume credits.
+- Transparent credit counter pill in the top navigation.
+
+### AI Stylist Pro: $399 USD for 14 Days
+- **14-day access pass** granting unlimited generations, single-piece swaps, and high-tier luxury catalog access.
+- **No auto-renewal trap**: Naturally expires after 14 days without surprise recurring charges.
+- Integrated with **Stripe Checkout** (`/api/checkout`) and verified webhooks (`/api/webhooks/stripe`). Includes an instant sandbox simulator for test environments.
+
+### Affiliate Monetization & FTC Compliance
+- Outbound click logging & redirect engine (`/api/affiliate/redirect`).
+- Clear FTC / ASA disclosure: We participate in affiliate marketing and may earn a commission on qualifying purchases at no extra cost to the buyer. No fabricated shopping links or inventory.
+
+---
+
+## 5. System Architecture & Routes
+
+```
+src/
+├── app/
+│   ├── layout.tsx                # Luxury layout with fonts, PWA meta, and modals
+│   ├── page.tsx                  # Flagship homepage (Hero, Moodboard, Method, Categories, Pricing, FAQ)
+│   ├── studio/page.tsx           # AI Outfit Studio (Camera upload -> 4-stage loader -> Moodboard canvas)
+│   ├── journal/                  # The Style Journal (6 in-depth sartorial masterclasses)
+│   │   ├── page.tsx              # Directory
+│   │   └── [slug]/page.tsx       # Detail with internal builder links
+│   ├── saved/page.tsx            # Private Look Vault with 1-click GDPR photo purge
+│   ├── account/page.tsx          # User profile, credits, Pro pass status, currency preferences
+│   ├── admin/page.tsx            # Curator console (metrics, stock toggles, catalog inventory)
+│   ├── privacy/page.tsx          # Privacy Policy & Photo Retention
+│   ├── terms/page.tsx            # Terms of Service & 14-day pass rules
+│   ├── refund/page.tsx           # Refund & Cancellation policy
+│   ├── affiliate-disclosure/page.tsx # FTC Affiliate Disclosure
+│   ├── support/page.tsx          # Concierge support desk
+│   └── api/
+│       ├── analyze/route.ts      # Multi-modal AI vision & styling engine
+│       ├── regenerate-item/route.ts # Single piece swap
+│       ├── checkout/route.ts     # Stripe Checkout session creator
+│       ├── webhooks/stripe/route.ts # Stripe webhook signature verification
+│       ├── affiliate/redirect/route.ts # Outbound click logger & redirect
+│       ├── outfits/route.ts      # Saved looks and GDPR deletion
+│       ├── user/credits/route.ts # Server-side credit and Pro pass status
+│       └── admin/route.ts        # Admin analytics and stock management
+├── components/
+│   ├── navigation/               # Header, BottomNav (iOS), Footer
+│   ├── studio/                   # ImageUploader, FilterDrawer, LoadingSequencer, OutfitCanvas, ProductCard, ItemSwapModal
+│   └── ui/                       # CountryCurrencyModal, UpgradeModal
+├── context/                      # Global AppContext (currency, country, user state)
+└── lib/                          # Prisma, AI stylist, real catalog, currency conversion, Stripe
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 6. Quick Start & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js 18+ (tested on Node v24)
+- npm or pnpm
 
-## Learn More
+### 1. Installation
+```bash
+git clone <repository_url>
+cd shopify
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Environment Setup
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Configuration variables:
+```ini
+DATABASE_URL="file:./dev.db"
+GEMINI_API_KEY=""                 # Optional: Google Gemini vision key (uses deterministic engine if empty)
+OPENAI_API_KEY=""                 # Optional: OpenAI GPT-4o key
+STRIPE_SECRET_KEY=""              # Optional: Stripe test key (uses sandbox simulator if empty)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+STRIPE_WEBHOOK_SECRET=""
+ADMIN_SECRET_KEY="atelier_admin_secret_2026"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Database Migration & Seeding
+```bash
+npx prisma db push
+npx prisma db seed
+```
 
-## Deploy on Vercel
+### 4. Run Automated Verification Test Suite
+```bash
+npx tsx scripts/verify-platform.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Start Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 7. Production Build
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 8. Verification Results
+Run `npx tsx scripts/verify-platform.ts` to verify all 19 subsystem tests:
+- Database Catalog Integrity (27 verified luxury products)
+- Deadly Ponies Bag & Belt Catalog Presence
+- Multi-Currency Converters (USD, NZD, GBP, JPY, EUR, AUD, CAD)
+- AI Vision & Attribute Extraction Pipeline
+- 5-Piece Coordinated Capsule Matcher with "Why It Matches" Rationales
+- Single-Piece Swap Engine
+- Server-Side Credit Deduction Rules (3 Free Outfits)
+- 14-Day Pro Pass Expiration Calculation
+- Style Journal Masterclasses Pre-rendering

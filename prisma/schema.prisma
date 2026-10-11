@@ -1,0 +1,108 @@
+// Prisma Schema for ATELIER AI - Fashion Stylist Platform
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  passwordHash    String?
+  name            String?
+  freeCredits     Int              @default(3)
+  isPro           Boolean          @default(false)
+  proExpiresAt    DateTime?
+  country         String           @default("US")
+  currency        String           @default("USD")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  outfits         Outfit[]
+  purchases       Purchase[]
+  affiliateClicks AffiliateClick[]
+}
+
+model Product {
+  id              String       @id @default(cuid())
+  name            String
+  brand           String
+  retailer        String
+  category        String       // "top", "bottom", "footwear", "outerwear", "accessory", "fragrance"
+  gender          String       @default("Unisex")
+  aesthetic       String       // "Quiet Luxury", "Old Money", "Streetwear", "Minimalist", etc.
+  priceUsd        Float
+  imageUrl        String
+  productUrl      String
+  affiliateUrl    String?
+  inStock         Boolean      @default(true)
+  sizes           String       // e.g. "S, M, L, XL"
+  description     String?
+  lastChecked     DateTime     @default(now())
+  outfitItems     OutfitItem[]
+}
+
+model Outfit {
+  id               String       @id @default(cuid())
+  userId           String?
+  user             User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  uploadedImageUrl String
+  originalGarment  String       // e.g. "Cashmere Mock-Neck Knit"
+  aesthetic        String       // "Quiet Luxury"
+  occasion         String?
+  season           String?
+  totalPrice       Float
+  currency         String       @default("USD")
+  isPublic         Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+  items            OutfitItem[]
+}
+
+model OutfitItem {
+  id           String   @id @default(cuid())
+  outfitId     String
+  outfit       Outfit   @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product? @relation(fields: [productId], references: [id])
+  slot         String   // "hero", "bottom", "footwear", "outerwear", "accessory", "vibe"
+  name         String
+  brand        String
+  price        Float
+  currency     String
+  imageUrl     String
+  productUrl   String
+  affiliateUrl String?
+  matchReason  String
+  isHero       Boolean  @default(false)
+}
+
+model Purchase {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeSessionId String   @unique
+  amount          Float    // e.g. 399.00
+  currency        String   @default("USD")
+  durationDays    Int      @default(14)
+  status          String   // "completed", "refunded"
+  createdAt       DateTime @default(now())
+}
+
+model AffiliateClick {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  productId String
+  retailer  String
+  country   String
+  createdAt DateTime @default(now())
+}
+
+model SystemSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
