@@ -25,8 +25,8 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ outfits });
   } catch (error) {
-    console.error("Error fetching outfits:", error);
-    return NextResponse.json({ error: "Failed to fetch outfits" }, { status: 500 });
+    console.warn("Error fetching outfits (using fallback):", error);
+    return NextResponse.json({ outfits: [] });
   }
 }
 

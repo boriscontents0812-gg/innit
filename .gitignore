@@ -28,8 +28,9 @@ yarn-error.log*
 # local env files
 .env
 .env*.local
-*.db
+dev.db
 *.db-journal
+!prisma/template.db
 
 # vercel
 .vercel
@@ -37,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+.env*
