@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { isShopifyConfigured, getShopifyStoreDomain } from "@/lib/shopify";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +38,12 @@ export async function GET(request: NextRequest) {
         activePurchasesCount: totalPurchases.length,
         totalRevenueUsd,
         totalAffiliateClicks,
+      },
+      shopify: {
+        isConfigured: isShopifyConfigured(),
+        domain: getShopifyStoreDomain(),
+        apiVersion: process.env.SHOPIFY_API_VERSION || "2024-07",
+        hasToken: Boolean(process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN),
       },
       recentPurchases: totalPurchases,
       products,

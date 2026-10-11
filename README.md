@@ -1,6 +1,6 @@
-# ATELIER AI — AI Fashion Stylist & Shopping Platform
+# innit — AI Fashion Stylist & Shopping Platform
 
-A production-ready, mobile-first AI fashion styling platform with the understated luxury aesthetic of **Deadly Ponies** (`deadlyponies.com`), built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, **Prisma ORM (SQLite/PostgreSQL)**, **Stripe**, and multi-modal AI Vision.
+A production-ready, mobile-first AI fashion styling platform with the understated luxury aesthetic of **Deadly Ponies** (`deadlyponies.com`), built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, **Prisma ORM (SQLite/PostgreSQL)**, **Stripe**, **Shopify Storefront API**, and multi-modal AI Vision.
 
 ---
 
@@ -17,11 +17,38 @@ The AI vision engine extracts the garment's weave texture, silhouette proportion
 4. **Artisanal Leather Accessories** (featuring handcrafted Deadly Ponies Bovine & Deer Nappa leather goods, belts, watches)
 5. **Lifestyle Atmosphere & Scent** (niche olfactive pairings like Le Labo Santal 33, Tom Ford Ombré Leather)
 
-Every piece includes a genuine **"Why This Matches"** explanation, verified real retailer links, real prices localized into 7 currencies, and individual piece swap controls.
+Every piece includes a genuine **"Why This Matches"** explanation, verified real retailer links, real prices localized into 7 currencies, individual piece swap controls, and **1-Click Shopify Checkout**.
 
 ---
 
-## 2. Visual Identity (Deadly Ponies Aesthetic)
+## 2. Shopify Store Connection
+
+**innit** connects directly with any Shopify store (including Deadly Ponies or your own custom merchant store) via the **Shopify Storefront GraphQL API**:
+
+- **Live Product Sync**: Pull products directly from your Shopify store catalog into the AI recommendation engine via `/api/shopify/products?sync=true` or the `/admin` control suite.
+- **1-Click Native Shopify Cart Checkout**: Users can click *"Shop Outfit on Shopify"* to bundle all in-stock pieces into an instant Shopify checkout session or Shop Pay.
+- **Works Out-of-the-Box**: Without API keys, the platform operates in a seamless sandbox mode redirecting to verified product pages; connecting your store keys enables live checkout URLs and direct catalog synchronization.
+
+### Connecting Your Shopify Store
+1. In your Shopify Admin, navigate to **Settings > Apps and sales channels > Develop apps**.
+2. Click **Create an app** (name it `innit AI Stylist`).
+3. Click **Configure Storefront API scopes** and enable:
+   - `unauthenticated_read_product_listings`
+   - `unauthenticated_read_product_inventory`
+   - `unauthenticated_write_checkouts`
+   - `unauthenticated_write_customers`
+4. Click **Install app** and copy your **Storefront API access token**.
+5. Add your credentials to `.env`:
+   ```ini
+   SHOPIFY_STORE_DOMAIN="your-store.myshopify.com"
+   SHOPIFY_STOREFRONT_ACCESS_TOKEN="shpat_..."
+   SHOPIFY_API_VERSION="2024-07"
+   ```
+6. Open `/admin` (Secret: `atelier_admin_secret_2026`) and click **Sync Products**!
+
+---
+
+## 3. Visual Identity (Deadly Ponies Aesthetic)
 
 - **Color Palette**:
   - Obsidian & Charcoal Canvas: `#0C0C0D`, `#141416`, `#19181B`
@@ -35,7 +62,7 @@ Every piece includes a genuine **"Why This Matches"** explanation, verified real
 
 ---
 
-## 3. Mobile-First & iOS Experience
+## 4. Mobile-First & iOS Experience
 
 - **Native Mobile Bottom Navigation**: Quick switches for *Studio*, *Journal*, *Saved Looks*, *Pro*, and *Account*.
 - **Camera & Gallery Picker**: Direct iOS camera trigger (`capture="environment"`), photo library picker, and desktop drag-and-drop.
@@ -45,7 +72,7 @@ Every piece includes a genuine **"Why This Matches"** explanation, verified real
 
 ---
 
-## 4. Business & Monetization Architecture
+## 5. Business & Monetization Architecture
 
 ### Complimentary Tier: 3 Free Outfits
 - Every user receives **3 free full outfit generations**.
@@ -63,7 +90,7 @@ Every piece includes a genuine **"Why This Matches"** explanation, verified real
 
 ---
 
-## 5. System Architecture & Routes
+## 6. System Architecture & Routes
 
 ```
 src/
@@ -76,7 +103,7 @@ src/
 │   │   └── [slug]/page.tsx       # Detail with internal builder links
 │   ├── saved/page.tsx            # Private Look Vault with 1-click GDPR photo purge
 │   ├── account/page.tsx          # User profile, credits, Pro pass status, currency preferences
-│   ├── admin/page.tsx            # Curator console (metrics, stock toggles, catalog inventory)
+│   ├── admin/page.tsx            # Curator console (Shopify sync, metrics, stock toggles, catalog)
 │   ├── privacy/page.tsx          # Privacy Policy & Photo Retention
 │   ├── terms/page.tsx            # Terms of Service & 14-day pass rules
 │   ├── refund/page.tsx           # Refund & Cancellation policy
@@ -90,18 +117,20 @@ src/
 │       ├── affiliate/redirect/route.ts # Outbound click logger & redirect
 │       ├── outfits/route.ts      # Saved looks and GDPR deletion
 │       ├── user/credits/route.ts # Server-side credit and Pro pass status
+│       ├── shopify/checkout/route.ts # 1-click Shopify cart creation
+│       ├── shopify/products/route.ts # Shopify Storefront catalog sync
 │       └── admin/route.ts        # Admin analytics and stock management
 ├── components/
 │   ├── navigation/               # Header, BottomNav (iOS), Footer
 │   ├── studio/                   # ImageUploader, FilterDrawer, LoadingSequencer, OutfitCanvas, ProductCard, ItemSwapModal
 │   └── ui/                       # CountryCurrencyModal, UpgradeModal
 ├── context/                      # Global AppContext (currency, country, user state)
-└── lib/                          # Prisma, AI stylist, real catalog, currency conversion, Stripe
+└── lib/                          # Prisma, AI stylist, real catalog, currency conversion, Stripe, Shopify
 ```
 
 ---
 
-## 6. Quick Start & Setup
+## 7. Quick Start & Setup
 
 ### Prerequisites
 - Node.js 18+ (tested on Node v24)
@@ -123,11 +152,22 @@ cp .env.example .env
 Configuration variables:
 ```ini
 DATABASE_URL="file:./dev.db"
-GEMINI_API_KEY=""                 # Optional: Google Gemini vision key (uses deterministic engine if empty)
-OPENAI_API_KEY=""                 # Optional: OpenAI GPT-4o key
-STRIPE_SECRET_KEY=""              # Optional: Stripe test key (uses sandbox simulator if empty)
+
+# Shopify Storefront API
+SHOPIFY_STORE_DOMAIN="deadly-ponies-nz.myshopify.com"
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=""
+SHOPIFY_API_VERSION="2024-07"
+
+# AI Vision & Language Models (Deterministic fallback if unconfigured)
+GEMINI_API_KEY=""
+OPENAI_API_KEY=""
+
+# Stripe Billing ($399 USD 14-Day Pass)
+STRIPE_SECRET_KEY=""
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
 STRIPE_WEBHOOK_SECRET=""
+
+# Admin Console Access
 ADMIN_SECRET_KEY="atelier_admin_secret_2026"
 ```
 

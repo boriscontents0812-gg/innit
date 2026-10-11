@@ -59,6 +59,33 @@ export default function OutfitCanvas({ outfit: initialOutfit, onRegenerateAll }:
     }
   };
 
+  const [isShopifyLoading, setIsShopifyLoading] = useState(false);
+
+  const handleShopifyCheckout = async () => {
+    setIsShopifyLoading(true);
+    try {
+      const res = await fetch("/api/shopify/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lines: outfit.items.map((it) => ({
+            merchandiseId: "gid://shopify/ProductVariant/51592955855122",
+            quantity: 1,
+          })),
+        }),
+      });
+
+      const data = await res.json();
+      if (data.checkoutUrl) {
+        window.open(data.checkoutUrl, "_blank");
+      }
+    } catch (e) {
+      console.error("Shopify checkout redirect failed:", e);
+    } finally {
+      setIsShopifyLoading(false);
+    }
+  };
+
   return (
     <div className="w-full space-y-12 animate-fade-in">
       {/* Top Capsule Header & Controls */}
@@ -119,6 +146,17 @@ export default function OutfitCanvas({ outfit: initialOutfit, onRegenerateAll }:
             >
               <Share2 className="w-4 h-4" />
               <span className="hidden sm:inline">{shareCopied ? "Copied!" : "Share"}</span>
+            </button>
+
+            {/* Shopify Cart Checkout Button */}
+            <button
+              onClick={handleShopifyCheckout}
+              disabled={isShopifyLoading}
+              className="bg-brass-500 hover:bg-brass-400 text-obsidian px-3.5 py-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md disabled:opacity-50"
+              title="Shop via connected Shopify store (Shop Pay)"
+            >
+              <ShoppingBag className="w-4 h-4 text-obsidian" />
+              <span>{isShopifyLoading ? "Opening..." : "Shopify Checkout"}</span>
             </button>
 
             {/* Regenerate All */}
